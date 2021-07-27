@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Bankruptcy Rate Prediction</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" href="../static/css/theme.css" type="text/css">
+  <script type="text/javascript">
+    function changeSource1() {
+      var but1 = document.getElementById('button_p');
+      but1.style.backgroundColor = '#2222ff';
+    }
+  </script>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-md navbar-dark bg-primary">
+    <div class="container"> <a class="navbar-brand" href="#">
+        <i class="fa d-inline fa-lg fa-stop-circle"></i>
+        <b> Bankruptcy Rate Prediction</b>
+      </a> <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" data-target="#navbar16" style="">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbar16">
+      </div>
+      <div class="row">
+        <div class="col-md-12"><a class="navbar-brand" onClick=window.location.href="/">Back To Home</a></div>
+      </div>
+    </div>
+  </nav>
+  <div class="py-5 text-center" style="background-image: url({{ url_for('static', filename='css/conf.jpg') }}); background-position: right bottom;  background-size: cover; background-repeat: repeat; background-attachment: fixed;">
+    <div class="container">
+      <div class="row">
+        <div class="bg-white p-4 col-10 mx-auto mx-md-0 col-lg-12" style="">
+          <h1>To Predict Your Company's Risk of Bankruptcy</h1>
+          <p class="mb-4" style="">To upload a csv file of 64 attribute vectors, and click the button"Predict".</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="py-5 text-center" style="">
+    <div class="container">
+      <div class="row" style="">
+        <div class="mx-auto col-lg-5 col-md-7 col-10 text-center text-capitalize">
+          <h1 class="d-inline-flex shadow">Upload</h1>
+          <p class="mb-1">Upload a csv file here</p>
+          <form method="POST" enctype="multipart/form-data" action="/predict">
+            <input type="file" id="myFile" name="filename" accept=".csv" href="#" class="btn btn-default w-50">
+
+            <select class="form-control" id="modelname" name="modelname">
+              <option value="Adaboost" selected="">Adaboost</option>
+              <option value="NN">NN</option>
+              <option value="knn">KNN</option>
+              <option value="Extreme Gradient Boosting">Extreme Gradient Boosting</option>
+              <option value="Random Forest">Random Forest</option>
+              <option value="Bagging">Bagging</option>
+            </select>
+
+            <div class="form-group" style=""><label contenteditable="true">Choose your model here</label></div>
+              <input class="btn btn-primary w-25" type="submit" href="#" id="button_p" data-target="#myModal" data-toggle="modal" value="Predict">
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="py-5 text-center">
+    <div class="container">
+      <div class="row">
+        <div class="mx-auto col-md-8">
+            {% if data %}
+          <h1 class="mb-3">The predicted probability of the company's bankruptcy: {{ data }}</h1>
+            {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="py-5 text-white" style="background-image: linear-gradient(to bottom, rgba(0, 0, 0, .75), rgba(0, 0, 0, .75)), url(https://static.pingendo.com/cover-bubble-dark.svg);  background-position: center center, center center;  background-size: cover, cover;  background-repeat: repeat, repeat;">
+    <div class="container">
+      <div class="row"></div>
+    </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous" style=""></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous" style=""></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous" style=""></script>
+
+</body>
+
+</html>

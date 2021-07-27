@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Performance</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" href="https://static.pingendo.com/bootstrap/bootstrap-4.3.1.css">
+  <script src="https://cdn.staticfile.org/echarts/4.3.0/echarts.min.js"></script>
+</head>
+
+<body>
+  <nav class="navbar bg-primary navbar-dark">
+    <div class="container"> <a class="navbar-brand" href="#">
+        <i class="fa d-inline fa-lg fa-circle"></i>
+        <b> Performance Checking</b>
+      </a> <div class="row">
+        <div class="col-md-12"><a class="navbar-brand" href="#" onClick=window.location.href="/" >Back To Home</a></div>
+    </div></div>
+  </nav>
+  <div style="height:400px;" id="ec0"></div>
+  <script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('ec0'));
+    // 指定图表的配置项和数据
+    var option = {
+      title: {
+        text: 'Precision'
+      },
+      tooltip: {},
+      legend: {
+        data: ['Precision']
+      },
+      xAxis: {
+        data: ['Adaboost', 'NN', 'knn', 'EGB', 'Random Forest', 'Bagging']
+      },
+      yAxis: {},
+      series: [{
+        name: 'rate',
+        type: 'bar',
+        data: [0.488727, 0.373364, 0.486773, 0.552955, 0.553273, 0.562136]
+      }]
+    };
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+  </script>
+  <div id="ec2" style="height:400px;"></div>
+  <script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('ec2'));
+    // 指定图表的配置项和数据
+    var option = {
+      title: {
+        text: 'Recall'
+      },
+      tooltip: {},
+      legend: {
+        data: ['rate']
+      },
+      xAxis: {
+        data: ['Adaboost', 'NN', 'knn', 'EGB', 'Random Forest', 'Bagging']
+      },
+      yAxis: {},
+      series: [{
+        name: 'Precision',
+        type: 'bar',
+        data: [0.56690429, 0.573265, 0.573265, 0.58496, 0.588276, 0.589016]
+      }]
+    };
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+  </script>
+  <div id="ec3" style="height:400px;"></div>
+  <script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('ec3'));
+    // 指定图表的配置项和数据
+    var option = {
+      title: {
+        text: 'Accuracy'
+      },
+      tooltip: {},
+      legend: {
+        data: ['rate']
+      },
+      xAxis: {
+        data: ['Adaboost', 'NN', 'knn', 'EGB', 'Random Forest', 'Bagging']
+      },
+      yAxis: {},
+      series: [{
+        name: 'Accuracy',
+        type: 'bar',
+        data: [0.8111818181818181, 0.5940909090909091, 0.8011818181818182, 0.9210909090909091, 0.9183636363636364, 0.9352727272727271]
+      }]
+    };
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+  </script>
+  <div class="py-5 text-center" style="">
+    <div class="container">
+      <div class="row" style="">
+        <div class="mx-auto col-lg-5 col-md-7 col-10 text-center text-capitalize">
+          <h1 class="d-inline-flex shadow">Check A Model's Performance</h1>
+          <select class="form-control" id="modelname" name="modelname">
+            <option value="1" selected="">Adaboost</option>
+            <option value="2">NN</option>
+            <option value="3">KNN</option>
+            <option value="4">Extreme Gradient Boosting</option>
+            <option value="5">Random Forest</option>
+            <option value="6">Bagging</option>
+          </select>
+          <div class="form-group" style=""><label contenteditable="true">Choose your model here</label></div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12"><a class="btn btn-secondary" href="#" onclick="test()">Check</a></div>
+      </div>
+    </div>
+  </div>
+  <div id="ec4" style="height: 400px;"></div>
+  <script type="text/javascript" style="">
+    function test() {
+      var myselect = document.getElementById("modelname");
+      var index = myselect.selectedIndex;
+      var ZZB;
+      if (myselect[index].value == 1) ZZB = [0.8111818181818181, 0.56690579, 0.48872727];
+      else if (myselect[index].value == 2) ZZB = [0.5940909090909091, 0.552664, 0.373364];
+      else if (myselect[index].value == 3) ZZB = [0.8011818181818182, 0.573265, 0.486773];
+      else if (myselect[index].value == 4) ZZB = [0.9210909090909091, 0.58496, 0.552955];
+      else if (myselect[index].value == 5) ZZB = [0.9183636363636364, 0.588276, 0.553273];
+      else if (myselect[index].value == 6) ZZB = [0.9352727272727271, 0.58901655, 0.56213635];
+      var myChart = echarts.init(document.getElementById('ec4'));
+      var option = {
+        title: {
+          text: myselect.options[index].text + ' Performance'
+        },
+        tooltip: {},
+        legend: {
+          data: ['rate']
+        },
+        xAxis: {
+          data: ['Accuracy', 'Precision', 'Recall']
+        },
+        yAxis: {},
+        series: [{
+          name: myselect.options[index].text,
+          type: 'bar',
+          data: ZZB
+        }]
+      };
+      myChart.setOption(option);
+    }
+  </script>
+  <div class="py-5 text-white" style="background-image: linear-gradient(to bottom, rgba(0, 0, 0, .75), rgba(0, 0, 0, .75)), url(https://static.pingendo.com/cover-bubble-dark.svg);  background-position: center center, center center;  background-size: cover, cover;  background-repeat: repeat, repeat;">
+    <div class="container">
+      <div class="row"></div>
+    </div>
+  </div>
+
+</body>
+
+</html>
